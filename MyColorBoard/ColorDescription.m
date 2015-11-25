@@ -10,7 +10,7 @@
 
 @implementation ColorDescription
 
--(instancetype)init{
+- (instancetype)init{
     self = [super init];
     if (self) {
         _color = [UIColor colorWithRed:1
@@ -20,6 +20,20 @@
         _name = @"White";
     }
     return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder{
+    self = [super init];
+    if (self) {
+        _color = [aDecoder decodeObjectForKey:@"color"];
+        _name = [aDecoder decodeObjectForKey:@"name"];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder{
+    [aCoder encodeObject:self.color forKey:@"color"];
+    [aCoder encodeObject:self.name forKey:@"name"];
 }
 
 @end

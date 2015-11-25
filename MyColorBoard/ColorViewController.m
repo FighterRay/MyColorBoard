@@ -55,6 +55,13 @@
     
     self.colorDescription.name = self.textField.text;
     self.colorDescription.color = self.view.backgroundColor;
+    
+    BOOL success = [self saveChanges];
+    if (success) {
+        NSLog(@"Save successful !");
+    }else{
+        NSLog(@"Not save successful!");
+    }
 }
 
 - (IBAction)dismiss:(id)sender
@@ -68,12 +75,22 @@
     float red = self.redSlider.value;
     float green = self.greenSlider.value;
     float blue = self.blueSlider.value;
-    NSLog(@"%f", blue);
     UIColor *newColor = [UIColor colorWithRed:red
                                         green:green
                                          blue:blue
                                         alpha:1.0];
     self.view.backgroundColor = newColor;
+}
+
+- (NSString *)colorDescriptionArchivePath{
+    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentDirectory = [documentDirectories firstObject];
+    return documentDirectory;
+}
+
+- (BOOL)saveChanges{
+    NSString *path = [self colorDescriptionArchivePath];
+    return [NSKeyedArchiver archiveRootObject:self.colorDescription toFile:path];
 }
 
 @end

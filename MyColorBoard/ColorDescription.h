@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ColorDescription : UIView
+@interface ColorDescription : UIView<NSCoding>
 
 @property (strong, nonatomic) UIColor *color;
 @property (strong, nonatomic) NSString *name;

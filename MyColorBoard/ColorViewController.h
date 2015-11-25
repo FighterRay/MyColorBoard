@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "ColorDescription.h"
 
-@interface ColorViewController : UIViewController
+@interface ColorViewController : UIViewController <UIApplicationDelegate>
+
 
 @property (nonatomic) BOOL existingColor;
 @property (nonatomic) ColorDescription *colorDescription;
