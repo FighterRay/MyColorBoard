@@ -15,6 +15,9 @@
 @property (weak, nonatomic) IBOutlet UISlider *greenSlider;
 @property (weak, nonatomic) IBOutlet UISlider *blueSlider;
 
+@property (weak, nonatomic) IBOutlet UITextField *redTextField;
+@property (weak, nonatomic) IBOutlet UITextField *greenTextField;
+@property (weak, nonatomic) IBOutlet UITextField *blueTextField;
 @end
 
 @implementation ColorViewController
@@ -56,12 +59,12 @@
     self.colorDescription.name = self.textField.text;
     self.colorDescription.color = self.view.backgroundColor;
     
-    BOOL success = [self saveChanges];
-    if (success) {
-        NSLog(@"Save successful !");
-    }else{
-        NSLog(@"Not save successful!");
-    }
+//    BOOL success = [self saveChanges];
+//    if (success) {
+//        NSLog(@"Save successful !");
+//    }else{
+//        NSLog(@"Not save successful!");
+//    }
 }
 
 - (IBAction)dismiss:(id)sender
@@ -79,18 +82,23 @@
                                         green:green
                                          blue:blue
                                         alpha:1.0];
+    
+    self.redTextField.text = [NSString stringWithFormat:@"%f", red * 255.0];
+    self.greenTextField.text = [NSString stringWithFormat:@"%f", green * 255.0];
+    self.blueTextField.text = [NSString stringWithFormat:@"%f", blue * 255.0];
+
     self.view.backgroundColor = newColor;
 }
 
-- (NSString *)colorDescriptionArchivePath{
-    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentDirectory = [documentDirectories firstObject];
-    return documentDirectory;
-}
-
-- (BOOL)saveChanges{
-    NSString *path = [self colorDescriptionArchivePath];
-    return [NSKeyedArchiver archiveRootObject:self.colorDescription toFile:path];
-}
+//- (NSString *)colorDescriptionArchivePath{
+//    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *documentDirectory = [documentDirectories firstObject];
+//    return documentDirectory;
+//}
+//
+//- (BOOL)saveChanges{
+//    NSString *path = [self colorDescriptionArchivePath];
+//    return [NSKeyedArchiver archiveRootObject:self.colorDescription toFile:path];
+//}
 
 @end
